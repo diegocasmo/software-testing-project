@@ -1,6 +1,6 @@
 # Software Testing Project
 
-Test's for numpy's ``numpy.linalg`` module.
+Tests for numpy's ``numpy.linalg`` module.
 
 ### Installation 
   - Make sure you have installed ``pip`` and your system's Python version is ``2.7.x``
