@@ -2,6 +2,7 @@ import operator
 
 from numpy.core import (asanyarray, matmul, dot, empty_like)
 from numpy.lib.twodim_base import eye
+from numpy import linalg
 
 # Error object
 class LinAlgError(Exception):
@@ -118,7 +119,7 @@ def matrix_power(a, n):
         return a
 
     elif n < 0:
-        a = inv(a)
+        a = linalg.inv(a)
         n = abs(n)
 
     # short-cuts.
