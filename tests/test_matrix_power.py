@@ -8,7 +8,8 @@ class TestMatrixPower(unittest.TestCase):
 
   def test_invalid_rank(self):
     '''
-    The matrix must be a square matrix, otherwise it must raise an error
+    `matrix_powers` requires matrices to have a rank higher than 2, otherwise
+    it must raise an error
     '''
     A = np.array([1])
     with self.assertRaises(LinAlgError):
@@ -16,7 +17,8 @@ class TestMatrixPower(unittest.TestCase):
 
   def test_invalid_squareness(self):
     '''
-    The matrix must be a square matrix, otherwise it must raise an error
+    The matrix must have the same number of columns and rows (square), otherwise
+    it must raise an error
     '''
     A = np.array([[1, 2, 3], [1, 2, 2]])
     with self.assertRaises(LinAlgError):
@@ -48,13 +50,6 @@ class TestMatrixPower(unittest.TestCase):
     A = np.array([[4, 2], [3, 7]])
     expected = [[22, 22], [33, 55]]
     self.assertTrue(np.all(matrix_power(A, 2) == expected))
-
-  def test_type_stack_objects(self):
-    '''
-    `matrix_power` does not support stacks of object arrays
-    '''
-    # TODO: How to create a stack of object arrays?
-    pass
 
   def test_exponent_zero(self):
     '''
