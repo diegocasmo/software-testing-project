@@ -27,15 +27,52 @@ class TestSolve(unittest.TestCase):
     with self.assertRaises(LinAlgError):
       solve(a,b)
 
-  def test_empty(self):
+  def test_b_zero_dim(self):
     '''
-    Empty array has rank less than 2, should thow exception.
+    Test with only b as zero dimentional, should raise Value error
+    '''
+    a = np.array([[1,2],[3,4]])
+    b = np.array([1])
+    with self.assertRaises(ValueError):
+      solve(a,b)
+  
+  def test_broadcast_error(self):
+    '''
+    Test for testing broadcast error
+    '''
+    a = np.array([[1,2],[3,4]])
+    b = np.array([[1,2],[3,4],[5,6]])
+    with self.assertRaises(ValueError):
+      solve(a,b)
+
+  def test_both_empty(self):
+    '''
+    Test with empty arrays, should thow exception.
     '''
     a = np.array([])
     b = np.array([])
     with self.assertRaises(LinAlgError):
       solve(a,b)
 
+  def test_return_shape(self):
+    '''
+    Test that the shape of the solution is the same as b
+    '''
+    a = np.array([[3,1], [1,2]])
+    b = np.array([9,8])
+    expected = np.array([2., 3.])
+    x = solve(a, b)
+    self.assertEquals(b.shape, x.shape)
+
+  def test_singular_matrix(self):
+    '''
+    Test with singular matrix should raise exception
+    '''
+    a = np.array([[0, 0], [0, 0]])
+    b = np.array([0, 0])
+    with self.assertRaises(LinAlgError):
+      solve(a, b)
+      
   def test_positive_integer(self):
     '''
     Test with all positive integers in matrix
@@ -46,9 +83,9 @@ class TestSolve(unittest.TestCase):
     x = solve(a, b)
     self.assertTrue(np.all(expected == x))
 
-  def test_some_negative_integer(self):
+  def test_negative_integer(self):
     '''
-    Test with a negative integer in matrix
+    Test with a negative integer in matrix system
     '''
     a = np.array([[1,1,1], [0,2,5], [2,5,-1]])
     b = np.array([6,-4,27])
