@@ -81,6 +81,8 @@ class TestSolve(unittest.TestCase):
     b = np.array([9,8])
     expected = np.array([2., 3.])
     x = solve(a, b)
+    # Check that solution is correct
+    self.assertTrue(np.allclose(np.dot(a,x), b))
     self.assertTrue(np.all(expected == x))
 
   def test_negative_integer(self):
@@ -91,6 +93,8 @@ class TestSolve(unittest.TestCase):
     b = np.array([6,-4,27])
     expected = np.array([5., 3., -2.])
     x = solve(a, b)
+    # Check that solution is correct
+    self.assertTrue(np.allclose(np.dot(a,x), b))
     self.assertTrue(np.all(expected == x))
 
   def test_positive_decimal(self):
@@ -101,6 +105,8 @@ class TestSolve(unittest.TestCase):
     b = np.array([9.0, 8.0])
     expected = np.array([2., 3.])
     x = solve(a, b)
+    # Check that solution is correct
+    self.assertTrue(np.allclose(np.dot(a,x), b))
     self.assertTrue(np.all(expected == x))
 
   def test_negative_decimal(self):
@@ -111,4 +117,6 @@ class TestSolve(unittest.TestCase):
     b = np.array([9.0, 8.0])
     expected = np.array([-2., -3.])
     x = solve(a, b)
+    # Check that solution is correct
+    self.assertTrue(np.allclose(np.dot(a,x), b))
     self.assertTrue(np.all(expected == x))
