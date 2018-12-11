@@ -75,7 +75,7 @@ class TestSolve(unittest.TestCase):
       
   def test_positive_integer(self):
     '''
-    Test with all positive integers in matrix
+    Test that it can solve with all positive integers in matrix
     '''
     a = np.array([[3,1], [1,2]])
     b = np.array([9,8])
@@ -87,7 +87,7 @@ class TestSolve(unittest.TestCase):
 
   def test_negative_integer(self):
     '''
-    Test with a negative integer in matrix system
+    Test that it can solve with some negative integer in matrix
     '''
     a = np.array([[1,1,1], [0,2,5], [2,5,-1]])
     b = np.array([6,-4,27])
@@ -99,7 +99,7 @@ class TestSolve(unittest.TestCase):
 
   def test_positive_decimal(self):
     '''
-    Test solving system with positive decimals
+    Test that it can solve with decimal numbers also
     '''
     a = np.array([[3.0, 1.0], [1.0, 2.0]])
     b = np.array([9.0, 8.0])
@@ -111,7 +111,7 @@ class TestSolve(unittest.TestCase):
 
   def test_negative_decimal(self):
     '''
-    Test solving system with negative decimals
+    Test that it can solve with some negative decimals
     '''
     a = np.array([[-3.0, -1.0], [-1.0, -2.0]])
     b = np.array([9.0, 8.0])
