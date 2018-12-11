@@ -1,7 +1,6 @@
 import unittest
 import numpy as np
-from numpy.linalg import solve
-from numpy.testing import assert_array_equal
+from numpy.linalg import solve, LinAlgError
 
 class TestSolve(unittest.TestCase):
 
@@ -10,12 +9,69 @@ class TestSolve(unittest.TestCase):
   which solve a linear matrix equation, or system of linear scalar equations.
   '''
 
-  def test_example(self):
+  def test_squareness(self):
     '''
-    TODO: Explain why this test was written
+    Matrix should be square, otherwise exception should be raised.
     '''
-    a = np.array([[3, 1], [1, 2]])
-    b = np.array([9, 8])
+    a = np.array([[1, 2, 3], [1, 2, 0]])
+    b = np.array([1, 0])
+    with self.assertRaises(LinAlgError):
+      solve(a,b)
+
+  def test_rank(self):
+    '''
+    Matrix should be of rank 2 or higher, otherwise exception should be raised.
+    '''
+    a = np.array([0])
+    b = np.array([1])
+    with self.assertRaises(LinAlgError):
+      solve(a,b)
+
+  def test_empty(self):
+    '''
+    Empty array has rank less than 2, should thow exception.
+    '''
+    a = np.array([])
+    b = np.array([])
+    with self.assertRaises(LinAlgError):
+      solve(a,b)
+
+  def test_positive_integer(self):
+    '''
+    Test with all positive integers in matrix
+    '''
+    a = np.array([[3,1], [1,2]])
+    b = np.array([9,8])
     expected = np.array([2., 3.])
     x = solve(a, b)
-    assert_array_equal(x, expected)
+    self.assertTrue(np.all(expected == x))
+
+  def test_some_negative_integer(self):
+    '''
+    Test with a negative integer in matrix
+    '''
+    a = np.array([[1,1,1], [0,2,5], [2,5,-1]])
+    b = np.array([6,-4,27])
+    expected = np.array([5., 3., -2.])
+    x = solve(a, b)
+    self.assertTrue(np.all(expected == x))
+
+  def test_positive_decimal(self):
+    '''
+    Test solving system with positive decimals
+    '''
+    a = np.array([[3.0, 1.0], [1.0, 2.0]])
+    b = np.array([9.0, 8.0])
+    expected = np.array([2., 3.])
+    x = solve(a, b)
+    self.assertTrue(np.all(expected == x))
+
+  def test_negative_decimal(self):
+    '''
+    Test solving system with negative decimals
+    '''
+    a = np.array([[-3.0, -1.0], [-1.0, -2.0]])
+    b = np.array([9.0, 8.0])
+    expected = np.array([-2., -3.])
+    x = solve(a, b)
+    self.assertTrue(np.all(expected == x))
