@@ -11,15 +11,24 @@ class TestDet(unittest.TestCase):
     Tests the case where the matrix contains only positive integers
     '''
     A = np.array([[1, 2], [3, 4]])
-    #B = np.array([[7, 7, 7], [3, 4, 3], [1, 5, 1]])
-    expected = -2.0
-    self.assertAlmostEqual(det(A), expected)
+    B = np.array([[7, 7, 7], [3, 4, 3], [1, 5, 1]])
+    expected_A = -2.0
+    expected_B = 0.0
+    self.assertAlmostEqual(det(A), expected_A)    
+    self.assertAlmostEqual(det(B), expected_B)
+
     
   def test_integer_negative(self):
     '''
     Tests the case where the matrix contains some negative integers
     '''
-    pass
+    A = np.array([[-1, -2], [-3, -4]])
+    B = np.array([[-7, -7, -7], [-3, -4, 3], [1, -5, -1]])
+    expected_A = -2.0
+    expected_B = -266.0
+    self.assertAlmostEqual(det(A), expected_A)    
+    self.assertAlmostEqual(det(B), expected_B)
+
         
   def test_decimal_positive(self):
     '''
@@ -28,6 +37,7 @@ class TestDet(unittest.TestCase):
     A = np.array([[0.5, 0.6], [0.3, 0.9]])
     expected = 0.27
     self.assertEqual(det(A), expected)
+ 
     
   def test_decimal_negative(self):
     '''
@@ -36,6 +46,7 @@ class TestDet(unittest.TestCase):
     A = np.array([[-0.5, -0.6], [0.3, -0.9]])
     expected = 0.63
     self.assertEqual(det(A), expected)
+
 
   def test_zeros(self):
     '''
@@ -62,16 +73,6 @@ class TestDet(unittest.TestCase):
     self.assertAlmostEqual(det(B), expected)
 
 
-  def test_what(self): 
-    '''
-    Weird behaviour
-    '''
-    A = np.array([[1]])
-    print A
-    expected = 1.0
-    self.assertEqual(det(A), expected)
-
-
   def test_empty(self):
     '''
     Empty arrays should raise an exeption
@@ -82,6 +83,7 @@ class TestDet(unittest.TestCase):
         det(A)
     with self.assertRaises(LinAlgError):
         det(B)  
+
         
   def test_proper_matrix(self):
     '''
@@ -96,6 +98,7 @@ class TestDet(unittest.TestCase):
         det(B)
     with self.assertRaises(LinAlgError):
         det(C)
+
         
   def test_squareness(self):
     '''
@@ -108,17 +111,36 @@ class TestDet(unittest.TestCase):
     with self.assertRaises(LinAlgError):
         det(B)
 
-'''
-  def test_multiple_matrices(self):
-  
-    A = np.array([ [[1, 2], [3, 4]], [[1, 2, 9], [2, 1, 19], [1, 3, 0]], [[1, 3], [3, 1]] ])
+
+  def test_what(self): 
+    '''
+    Weird behaviour
+    '''
+    A = np.array([[1]])
     print A
-    print A.shape
-    expected = np.array([-2., 26., -8.])
-    g = det(A)
-    print g
-    self.assertTrue(np.allclose(det(A),expected))
-'''
+    expected = 1.0
+    self.assertEqual(det(A), expected)
+    
+
+  def test_multiple_matrices(self):
+    '''
+    When the input is an array of matrices, the output should be
+    an array containing the determinants of those matrices
+    ''' 
+    A = np.array([ [[1, 2], [3, 4]], 
+                   [[1, 2], [2, 19]], 
+                   [[1, 3], [3, 1]] ])
+    
+    B = np.array([ [[7, 5, 11], [12, 6, 3], [8, 8, 8]], 
+                   [[1, 2, 9], [2, 1, 19], [1, 3, 0]], 
+                   [[7, 7, 7], [3, 4, 3], [1, 5, 1]] ])
+
+    expected_A = np.array([-2., 15., -8.])
+    expected_B = np.array([336., 26., 0.])
+    
+    self.assertTrue(np.allclose(det(A),expected_A))
+    self.assertTrue(np.allclose(det(B),expected_B))
+
    
 if __name__=='__main__':
     unittest.main()
