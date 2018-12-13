@@ -52,9 +52,7 @@ def multi_dot_matrix_chain_order(arrays, return_costs=False):
     # s is the actual ordering
     # s[i, j] is the value of k at which we split the product A_i..A_j
     s = empty((n, n), dtype=intp)
-    print("p: ",p)
-    print("m:",m)
-    print("s :", s)
+
     for l in range(1, n):
         for i in range(n - l):
             j = i + l
