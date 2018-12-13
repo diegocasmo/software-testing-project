@@ -35,6 +35,14 @@ class TestMatrixPower(unittest.TestCase):
       with self.assertRaises(TypeError):
         matrix_power(A, x)
 
+  def test_invalid_object_stack(self):
+    '''
+    If the input is an array of object matrixes it should raise NotImplementedError
+    '''
+    A = np.array([[[1, 2], [1, 2]],[[1, 2],[1, 2]]], dtype='object')
+    with self.assertRaises(NotImplementedError):
+      matrix_power(A, 3)
+
   def test_type_object_array(self):
     '''
     `matrix_power` falls back to `np.dot` when the matrix is of type `object`
