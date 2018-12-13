@@ -1,5 +1,3 @@
-import operator
-
 from numpy.core import (
     zeros, empty, double, Inf, intp
 )
