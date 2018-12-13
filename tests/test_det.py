@@ -110,16 +110,6 @@ class TestDet(unittest.TestCase):
         det(A)
     with self.assertRaises(LinAlgError):
         det(B)
-
-
-  def test_what(self): 
-    '''
-    Weird behaviour
-    '''
-    A = np.array([[1]])
-    print A.shape
-    expected = 1.0
-    self.assertEqual(det(A), expected)
     
 
   def test_multiple_matrices(self):
