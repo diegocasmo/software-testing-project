@@ -48,6 +48,19 @@ class TestDet(unittest.TestCase):
     self.assertEqual(det(A), expected)
 
 
+  def test_single_element(self): 
+    '''
+    For 1 dimensional matrices, the element in the matrix should 
+    be returned
+    '''
+    A = np.array([[1]])
+    B = np.array([[0.33]])
+    expected_A = 1.0
+    expected_B = 0.33
+    self.assertEqual(det(A), expected_A)
+    self.assertEqual(det(B), expected_B)
+
+
   def test_zeros(self):
     '''
     When a matrix contains on or more rows where all elements are 0 the 
