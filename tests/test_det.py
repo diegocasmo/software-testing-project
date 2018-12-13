@@ -117,7 +117,7 @@ class TestDet(unittest.TestCase):
     Weird behaviour
     '''
     A = np.array([[1]])
-    print A
+    print A.shape
     expected = 1.0
     self.assertEqual(det(A), expected)
     
