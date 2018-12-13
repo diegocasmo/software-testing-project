@@ -38,7 +38,7 @@ class TestSolve(unittest.TestCase):
   
   def test_broadcast_error(self):
     '''
-    Test for testing broadcast error when the arrays have incopatiable shapes
+    Test for testing broadcast error when the arrays have incompatible shapes
     '''
     a = np.array([[1,2],[3,4]])
     b = np.array([[1,2],[3,4],[5,6]])
