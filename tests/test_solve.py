@@ -32,13 +32,13 @@ class TestSolve(unittest.TestCase):
     Test with only b as zero dimentional, should raise Value error
     '''
     a = np.array([[1,2],[3,4]])
-    b = np.array([1])
+    b = np.array([])
     with self.assertRaises(ValueError):
       solve(a,b)
   
   def test_broadcast_error(self):
     '''
-    Test for testing broadcast error
+    Test for testing broadcast error when the arrays have incopatiable shapes
     '''
     a = np.array([[1,2],[3,4]])
     b = np.array([[1,2],[3,4],[5,6]])
@@ -75,7 +75,7 @@ class TestSolve(unittest.TestCase):
       
   def test_positive_integer(self):
     '''
-    Test that it can solve with all positive integers in matrix
+    Test that it can solve with only positive integers in the matrix
     '''
     a = np.array([[3,1], [1,2]])
     b = np.array([9,8])
@@ -99,7 +99,7 @@ class TestSolve(unittest.TestCase):
 
   def test_positive_decimal(self):
     '''
-    Test that it can solve with decimal numbers also
+    Test that it can solve with positive decimal numbers in the matrix
     '''
     a = np.array([[3.0, 1.0], [1.0, 2.0]])
     b = np.array([9.0, 8.0])
